@@ -15,3 +15,10 @@
 
 # Add a feed source
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+
+# 删除失效的 modemfeed 源
+sed -i '/modemfeed/d' feeds.conf.default
+
+# 添加 passwall 源（luci 用 tag 25.6.1-1，packages 锁 commit 925712b）
+sed -i '1i src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;25.6.1-1' feeds.conf.default
+sed -i '1i src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git^925712b' feeds.conf.default
